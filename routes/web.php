@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EncuestasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [EncuestasController::class,'index']);
+Route::get('/encuestas',function(){
+    return view('form');
+})->name('encuestas');
+
+
+Route::post('/enviarEncuesta',[EncuestasController::class,'create'])->name('enviar');
