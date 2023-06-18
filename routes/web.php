@@ -21,3 +21,6 @@ Route::get('/encuestas',function(){
 
 
 Route::post('/enviarEncuesta',[EncuestasController::class,'create'])->name('enviar');
+Route::get('documentacionAPI', function () {
+    return view('API');
+})->name('documentacion');

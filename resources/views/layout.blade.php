@@ -29,7 +29,7 @@
                     <a href="{{route('encuestas')}}" class="nav-link">Encuesta</a>
                 </li>
                 <li class="nav-item active">
-                    <a href="#" class="nav-link">Documentacion API</a>
+                    <a href="{{route('documentacion')}}" class="nav-link">Documentacion API</a>
                 </li>
             </ul>
     </nav>

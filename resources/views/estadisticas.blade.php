@@ -2,18 +2,26 @@
 @section('title','Dashboard')
 
 @section('content')
-
-    <h2 class="title">Estadisticas</h2>
+<script>
+    function time_convert(num)
+ { 
+  var hours = Math.floor(num);  
+  var minutes = Math.round((num % 1)*60);
+  console.log(hours + ":" + minutes);
+  return hours + ":" + minutes;         
+}
+</script>
+    <h2 class="titles">Estadisticas</h2>
 
     <h4>Red favorita: {{$estadisticas['redF']}}</h4>
     <h4>Red menos usada: {{$estadisticas['redMenosF']}}</h4>
-    <h4>Tiempo Facebook {{$estadisticas['tiempoF'] }}</h4>
-    <h4>Tiempo Whatsapp {{$estadisticas['tiempoW']}}</h4>
-    <h4>Tiempo Twitter {{$estadisticas['tiempoTw']}}</h4>
-    <h4>Tiempo Instagram {{$estadisticas['tiempoI']}}</h4>
-    <h4>Tiempo Tiktok {{$estadisticas['tiempoTi']}}</h4>
+    <h4>Tiempo Facebook: <script>document.write(time_convert({{$estadisticas['tiempoF'] }})) </script></h4>
+    <h4>Tiempo Whatsapp <script>document.write(time_convert({{$estadisticas['tiempoW'] }})) </script></h4>
+    <h4>Tiempo Twitter <script>document.write(time_convert({{$estadisticas['tiempoTw'] }})) </script></h4>
+    <h4>Tiempo Instagram <script>document.write(time_convert({{$estadisticas['tiempoI'] }})) </script></h4>
+    <h4>Tiempo Tiktok <script>document.write(time_convert({{$estadisticas['tiempoTi'] }})) </script></h4>
 
-    <h2 class="title">Redes mas usadas por cada Edad:</h2>
+    <h2 class="titles">Redes mas usadas por cada Edad:</h2>
     <?php
         $data=[
             'Facebook',
@@ -37,18 +45,7 @@
     @endforeach
     
 
-<?php
-/*
-    function tiempo($n){
-        $num = $n;
-        $hours = ($num / 60);
-        $rhours = floor($hours);
-        $minutes = ($hours - $rhours) * 60;
-        $rminutes = round($minutes);
-        return $num . " minutes = " . $rhours + " hour(s) and " . $rminutes 0 " minute(s).";
-    }
-    */
-?>
 
 
 @endsection
+
