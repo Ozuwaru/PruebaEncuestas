@@ -3,22 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Encuesta;
-use app\Repository\iEncuestasRepo;
+use App\Repository\EncuestasRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class EncuestasController extends Controller
 {   
-    private iEncuestasRepo $encuestaRepo;
-    public function __construct(iEncuestasRepo $repo)
+    private EncuestasRepo $encuestaRepo;
+    public function __construct(EncuestasRepo $repo)
     {
         $this->encuestaRepo = $repo;
     }
 
     public function index(){
-        $encuesta = $this->encuestaRepo->all();
-        dd($encuesta);
-        $cantidad = Encuesta::count();
+        $encuesta = $this->encuestaRepo->all(Encuesta::class);
+        //dd($encuesta);
+        //$this->encuestaRepo->rangoEdad($encuesta,'tFacebook');
+        //$this->encuestaRepo->rangoEdad($encuesta,'tWhatsapp');
+        $this->encuestaRepo->info();
+        //$this->encuestaRepo->redesPorEdad();
+        /*
         $encuestas = Encuesta::get();
         $pF=0;
         $pW=0;
@@ -58,7 +62,7 @@ class EncuestasController extends Controller
         }
         $favorita=NULL;
 
-        dd($mas,$menos);
+        dd($mas,$menos);*/
     }
 
     public function create(Request $request){

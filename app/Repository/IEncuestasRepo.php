@@ -1,6 +1,7 @@
 <?php
-namespace app\Repository;
+namespace App\Repository;
 
 interface iEncuestasRepo{
-    function all():array;
+    function all($model);
+    function cantidad($model);
 }
