@@ -16,53 +16,10 @@ class EncuestasController extends Controller
     }
 
     public function index(){
-        $encuesta = $this->encuestaRepo->all(Encuesta::class);
-        //dd($encuesta);
-        //$this->encuestaRepo->rangoEdad($encuesta,'tFacebook');
-        //$this->encuestaRepo->rangoEdad($encuesta,'tWhatsapp');
-        $this->encuestaRepo->info();
-        //$this->encuestaRepo->redesPorEdad();
-        /*
-        $encuestas = Encuesta::get();
-        $pF=0;
-        $pW=0;
-        $pTw=0;
-        $pI=0;
-        $pTi=0;
-        $favorita=[
-            1=>0,
-            2=>0,
-            3=>0,
-            4=>0,
-            5=>0
-        ];
-        foreach($encuestas as $e){
-
-            $favorita[$e['RedFavorita']]+=1;
-
-            $pF+=$e['tFacebook'];
-            $pW+=$e['tWhatsapp'];
-            $pTw+=$e['tTwitter'];
-            $pI+=$e['tInstagram'];
-            $pTi+=$e['tTiktok'];
-        }
-        $pF/=$cantidad;
-        $pW/=$cantidad;
-        $pTw/=$cantidad;
-        $pI/=$cantidad;
-        $pTi/=$cantidad;
-        $menos=1;
-        $mas=1;
-        for($i=1;$i<6;$i++){
-            if($favorita[$i]>$favorita[$mas]){
-                $mas=$i;
-            }else if($favorita[$i]<$favorita[$menos]){
-                $menos=$i;
-            }
-        }
-        $favorita=NULL;
-
-        dd($mas,$menos);*/
+        //$encuesta = $this->encuestaRepo->all(Encuesta::class);
+        $estadisticas =$this->encuestaRepo->info();
+        json_encode($estadisticas);
+        return view('estadisticas',['estadisticas'=>$estadisticas]);
     }
 
     public function create(Request $request){
