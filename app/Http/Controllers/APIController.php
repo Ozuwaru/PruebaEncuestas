@@ -17,6 +17,6 @@ class APIController extends Controller
     }
 
     public function registrar(Request $request){
-        $this->encuestaRepo->create($request);
+        return $this->encuestaRepo->create($request);
     }
 }

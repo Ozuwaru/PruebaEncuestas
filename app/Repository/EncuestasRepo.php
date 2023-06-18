@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class EncuestasRepo implements iEncuestasRepo{
     
    
-    function create(Request $request, bool $page=false){
+    function create(Request $request, bool $page=NULL){
         $rules=[
             'correo'=>'required|string|max:255|unique:encuestas'
         ];
@@ -17,12 +17,11 @@ class EncuestasRepo implements iEncuestasRepo{
             $request->only('correo'),
             $rules
         );
-        if($validator->failed() ){
+        if($validator->fails() ){
             if(!$page){
                return response()->json([
-                   'message'=>'task failed',
-                   405
-               ]);
+                   'message'=>'Registro Fallido, correo existente'
+               ],405);
             }
 
             return redirect()->back()->withErrors($validator)->withInput();

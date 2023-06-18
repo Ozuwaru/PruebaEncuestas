@@ -22,4 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('obtenerStats',[APIController::class,'getD']);
-Route::post('obtenerStats',[APIController::class,'registrar']);
+Route::post('enviarEncuesta',[APIController::class,'registrar']);
