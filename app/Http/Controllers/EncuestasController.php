@@ -16,38 +16,14 @@ class EncuestasController extends Controller
     }
 
     public function index(){
-        //$encuesta = $this->encuestaRepo->all(Encuesta::class);
-        $estadisticas =$this->encuestaRepo->info();
+        $estadisticas =$this->encuestaRepo->info(true);
         json_encode($estadisticas);
         return view('estadisticas',['estadisticas'=>$estadisticas]);
     }
 
     public function create(Request $request){
-        $rules=[
-            'correo'=>'required|string|max:255|unique:encuestas'
-        ];
-        $validator = Validator::make(
-            $request->only('correo'),
-            $rules
-        );
         
-        if($validator->fails()){
-            redirect()->back()->withErrors($validator)->withInput();
-        }
-        
-        //dd($request->correo);
-        $encuesta = Encuesta::create([
-            'Correo'=>$request->correo,
-            'Sexo'=>$request->sexo,
-            'Edad'=>$request->edad,
-            'RedFavorita'=>$request->favorita,
-            'tFacebook'=>($request->horas_facebook+($request->minutos_facebook)/60),
-            'tWhatsapp'=>($request->horas_Whatsapp+($request->minutos_Whatsapp)/60),
-            'tTwitter'=>($request->horas_Twitter+($request->minutos_Twitter)/60),
-            'tInstagram'=>($request->horas_Instagram+($request->minutos_Instagram)/60),
-            'tTiktok'=>($request->horas_Tiktok+($request->minutos_Tiktok)/60),
-            
-        ]);
+        $this->encuestaRepo->create($request,true);
         return redirect('/');
     }
 }

@@ -22,11 +22,11 @@
     </style>
      <nav class="navbar navbar-expand-sm   navbar-dark bg-dark">
         
-        <a class="navbar-brand" href="#">Estadísticas</a>
+        <a class="navbar-brand" href="{{route('main')}}">Estadísticas</a>
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a href="{{route('encuestas')}}" class="nav-link">Encuestas</a>
+                    <a href="{{route('encuestas')}}" class="nav-link">Encuesta</a>
                 </li>
                 <li class="nav-item active">
                     <a href="#" class="nav-link">Documentacion API</a>

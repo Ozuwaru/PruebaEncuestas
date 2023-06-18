@@ -2,11 +2,50 @@
 namespace App\Repository;
 
 use App\Models\Encuesta;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Validator;
 class EncuestasRepo implements iEncuestasRepo{
+    
+   
+    function create(Request $request, bool $page=false){
+        $rules=[
+            'correo'=>'required|string|max:255|unique:encuestas'
+        ];
+        $validator = Validator::make(
+            $request->only('correo'),
+            $rules
+        );
+        if($validator->failed() ){
+            if(!$page){
+               return response()->json([
+                   'message'=>'task failed',
+                   405
+               ]);
+            }
 
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        Encuesta::create([
+            'Correo'=>$request->correo,
+            'Sexo'=>$request->sexo,
+            'Edad'=>$request->edad,
+            'RedFavorita'=>$request->favorita,
+            'tFacebook'=>($request->horas_facebook+($request->minutos_facebook)/60),
+            'tWhatsapp'=>($request->horas_Whatsapp+($request->minutos_Whatsapp)/60),
+            'tTwitter'=>($request->horas_Twitter+($request->minutos_Twitter)/60),
+            'tInstagram'=>($request->horas_Instagram+($request->minutos_Instagram)/60),
+            'tTiktok'=>($request->horas_Tiktok+($request->minutos_Tiktok)/60),
+            
+        ]);
+        if(!$page){
+            return response()->json([
+                'message'=>'Encuesta Creada Correctamente'
+            ],201);
+        }
+    }
     function all($model):Collection{
         $info = $model::get();
         return $info;
@@ -58,7 +97,7 @@ class EncuestasRepo implements iEncuestasRepo{
         return $info;
     }
 
-    function info():array{
+    function info(bool $page=false){
         $encuestas = Encuesta::get();
         $cantidad = $encuestas->count();
         //dd($cantidad);
@@ -111,7 +150,15 @@ class EncuestasRepo implements iEncuestasRepo{
             'redMenosF'=>$menos,
             'rangoEdad'=>$this->redesPorEdad($encuestas)
         ];
-        //dd($info);
+        if(!$page){
+            return response()->json([
+                'message'=>'Tarea realizada',
+                'estadisticas'=>($info)
+            ],200);
+        }
         return $info;
     }
+
+
+
 }

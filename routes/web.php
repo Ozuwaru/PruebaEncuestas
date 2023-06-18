@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [EncuestasController::class,'index']);
+Route::get('/', [EncuestasController::class,'index'])->name('main');
 Route::get('/encuestas',function(){
     return view('form');
 })->name('encuestas');

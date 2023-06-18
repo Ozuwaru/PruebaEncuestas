@@ -7,7 +7,7 @@
 
     <h4>Red favorita: {{$estadisticas['redF']}}</h4>
     <h4>Red menos usada: {{$estadisticas['redMenosF']}}</h4>
-    <h4>Tiempo Facebook {{$estadisticas['tiempoF']}}</h4>
+    <h4>Tiempo Facebook {{$estadisticas['tiempoF'] }}</h4>
     <h4>Tiempo Whatsapp {{$estadisticas['tiempoW']}}</h4>
     <h4>Tiempo Twitter {{$estadisticas['tiempoTw']}}</h4>
     <h4>Tiempo Instagram {{$estadisticas['tiempoI']}}</h4>
@@ -36,6 +36,19 @@
         <?php $c++?>
     @endforeach
     
+
+<?php
+/*
+    function tiempo($n){
+        $num = $n;
+        $hours = ($num / 60);
+        $rhours = floor($hours);
+        $minutes = ($hours - $rhours) * 60;
+        $rminutes = round($minutes);
+        return $num . " minutes = " . $rhours + " hour(s) and " . $rminutes 0 " minute(s).";
+    }
+    */
+?>
 
 
 @endsection
