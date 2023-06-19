@@ -7,60 +7,87 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## App de Encuestas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Una vez descargado el repositorio, lo primero sera usar el siguiente comando en una consola abierta en la raiz del repositorio:
+<pre>
+    php artisan migrate
+</pre>
+<br>
+Este comando nos creará las bases de datos y son clave para el funcionamiento del codigo.
+<br>
+Luego de esto, podremos ejecutar el repositorio localmente y tendremos tres posibles rutas a acceder.
+<br>
+"/public/"
+<br>
+Será la vista principal y nos permitirá obtener toda la info de nuestra base de Datos.
+<br>
+"/public/encuestas"
+<br>
+Será nuestro apartado de encuesta y tendrá un formulario para enviar la encuesta.
+<br>
+"public/documentacionAPI"
+<br>
+Tendrá la documentación para utilizar nuestra API, sin embargo, aqui estará de igual forma:br>br>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+//Para obtener informacion de nuestra API necesitamos acceder a la siguiente Ruta:<br>
+                "public/api/obtenerStats"<br>
+                //la cual nos devolverá un json de la forma:<br>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+                
+                <pre>
+                    {
+                        "message": "Tarea realizada",
+                        "estadisticas": {
+                            "cantidad": 3,
+                            "tiempoF": 2.01,
+                            "tiempoW": 0,
+                            "tiempoTw": 2.026666666666667,
+                            "tiempoI": 1.7366666666666666,
+                            "tiempoTi": 0,
+                            "redF": 1,
+                            "redMenosF": 2,
+                            "rangoEdad": {
+                                "tFacebook": 2,
+                                "tWhatsapp": 1,
+                                "tTwitter": 2,
+                                "tInstagram": 2,
+                                "tTiktok": 1
+                            }
+                        }
+                    }
+                </pre>
 
-## Learning Laravel
+//Para enviar una encuesta, tenemos que hacer un envio de a la Ruta:<br>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+                "public/api/enviarEncuesta"<br>
+                //habrá que enviarle un request de la siguiente forma:<br>
+                {
+                    "correo" => "oswaldtorrealba1@gmail.com",
+                    "edad" => "1",
+                    "sexo" => "1",
+                    "favorita" => "1",
+                    "horas_facebook" => "0",
+                    "minutos_facebook" => "0",
+                    "horas_Twitter" => "0",
+                    "minutos_Twitter" => "0",
+                    "horas_Whatsapp" => "0",
+                    "minutos_Whatsapp" => "0",
+                    "horas_Instagram" => "0",
+                    "minutos_Instagram" => "0",
+                    "horas_Tiktok" => "0",
+                    "minutos_Tiktok" => "0",
+                }
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+                //Si el registro funcionó correctamente, se mostrará el mensaje:<br>
+                {
+                    "message": "Encuesta Creada Correctamente"
+                }
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+                //En caso contrario, si no se validan las condiciones, como un correo unico por encuesta, se mostrará:<br>
+                {
+                    "message": "Registro Fallido, correo existente",
+                }
+            
