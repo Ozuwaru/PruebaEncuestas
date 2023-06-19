@@ -99,6 +99,9 @@ class EncuestasRepo implements iEncuestasRepo{
     function info(bool $page=false){
         $encuestas = Encuesta::get();
         $cantidad = $encuestas->count();
+        if($cantidad<=0){
+            $cantidad=1;
+        }
         //dd($cantidad);
         $pF=0;
         $pW=0;
